@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\Waybill;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\providers;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Waybill;
 use yii\db\Query;
 
 class SiteController extends Controller
@@ -141,22 +142,22 @@ class SiteController extends Controller
     public function actionZaprosone()
     {
         $model = new Waybill();
-        if($model->load(Yii::$app->request->post()) && $model->validate())
+        if($model->load(Yii::$app->request->post()) )
        {
             $waybill = waybill::find()
-                ->select(['COUNT(id_providers) AS id_providers'  , 'date_waybill'])
+                ->select(['COUNT(id_providers) AS id_providers'  , 'date_waybill', 'date_delivery'])
                 ->from('waybill')
-                ->where(['and',['=', 'date_waybill', $model->date_waybill]])
+//                ->where(['and',['>=', 'date_waybill', $model->date_w],['<=', 'date_delivery', $model->date_d]])
                 ->andWhere(['=', 'amount' , $model->amount])
-                ->groupBy([ 'date_waybill'])
+                ->groupBy([ 'date_waybill', 'date_delivery'])
                 ->all();
         } else
             $waybill = waybill::find()
-                ->select(['COUNT(id_providers)', 'provider_price_piece'])
+                ->select(['COUNT(id_providers)', 'waybill.date_waybill', 'date_delivery'])
                 ->from('waybill')
-                ->where(['and',['=', 'date_waybill',  date('Y-m-d')]])
+                //->where(['and',['>=', 'waybill.date_waybill',  date('Y-m-d')],['>=', 'date_delivery',  date('Y-m-d')]])
                 ->andWhere([ 'amount' => 50])
-                ->groupBy('date_waybill')
+                ->groupBy(['waybill.date_waybill', 'date_delivery'])
                 ->all();
 
 //        $waybill = waybill::find()->where(['and',['=', 'date_waybill', date('Y-m-d')]])->all();
@@ -165,6 +166,29 @@ class SiteController extends Controller
             'model' => $model,
             'waybill' => $waybill,
         ]);
+
+    }
+    public function actionRequesttwo()
+    {
+        $model = new Waybill();
+        if($model->load(Yii::$app->request->post()) ){
+           $req = waybill::find()
+                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
+                ->from('waybill')
+                ->where(['id_detalis' => $model->id_detalis ])
+                ->all();
+        } else
+            $req = waybill::find()
+                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
+                ->from('waybill')
+                ->where(['id_detalis' => 1 ])
+                ->all();
+
+        return $this->render('requesttwo', [
+                'model' => $model,
+                'req' => $req,
+            ]
+        );
     }
 }
 

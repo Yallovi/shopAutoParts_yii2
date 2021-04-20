@@ -8,15 +8,19 @@ use yii\db\ActiveRecord;
 
 class Waybill extends ActiveRecord
 {
-    public $date_waybill = '2007-05-20';
-    public $date_delivery;
-    public $amount = '50';
+    public $date_w  = '2007-05-20';
+    public $date_d = '2007-06-20';
+    public $amount ;
+    public $id_detalis;
 
     public function rules()
     {
         return [
-            [['date_waybill'], 'date', 'format'  => 'yyyy-MM-dd'],
             [['amount'], 'required'],
+            [['date_w', 'date_d'],'date', 'format'  => 'y-m-d', ],
+
+           [['id_detalis'],'required'],
+
         ];
     }
 }
