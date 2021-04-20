@@ -15,7 +15,8 @@ class Waybill extends ActiveRecord
     public function rules()
     {
         return [
-            [['date_waybill'], 'date', 'format'  => 'yyyy-MM-dd']
+            [['date_waybill'], 'date', 'format'  => 'yyyy-MM-dd'],
+            [['amount'], 'required'],
         ];
     }
 }

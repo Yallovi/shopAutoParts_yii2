@@ -143,9 +143,23 @@ class SiteController extends Controller
         $model = new Waybill();
         if($model->load(Yii::$app->request->post()) && $model->validate())
        {
-            $waybill = waybill::find()->where(['and',['=', 'date_waybill', $model->date_waybill]])->all();
+            $waybill = waybill::find()
+                ->select(['COUNT(id_providers) AS id_providers'  , 'date_waybill'])
+                ->from('waybill')
+                ->where(['and',['=', 'date_waybill', $model->date_waybill]])
+                ->andWhere(['=', 'amount' , $model->amount])
+                ->groupBy([ 'date_waybill'])
+                ->all();
         } else
-        $waybill = waybill::find()->where(['and',['=', 'date_waybill', date('Y-m-d')]])->all();
+            $waybill = waybill::find()
+                ->select(['COUNT(id_providers)', 'provider_price_piece'])
+                ->from('waybill')
+                ->where(['and',['=', 'date_waybill',  date('Y-m-d')]])
+                ->andWhere([ 'amount' => 50])
+                ->groupBy('date_waybill')
+                ->all();
+
+//        $waybill = waybill::find()->where(['and',['=', 'date_waybill', date('Y-m-d')]])->all();
 
         return $this->render('zaprosone', [
             'model' => $model,
