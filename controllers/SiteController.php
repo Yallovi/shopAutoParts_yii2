@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -12,6 +11,7 @@ use app\models\providers;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Waybill;
+use app\models\Sale;
 use yii\db\Query;
 
 class SiteController extends Controller
@@ -147,7 +147,7 @@ class SiteController extends Controller
             $waybill = waybill::find()
                 ->select(['COUNT(id_providers) AS id_providers'  , 'date_waybill', 'date_delivery'])
                 ->from('waybill')
-//                ->where(['and',['>=', 'date_waybill', $model->date_w],['<=', 'date_delivery', $model->date_d]])
+                ->where(['and',['>=', 'date_waybill', $model->date_w],['<=', 'date_delivery', $model->date_d]])
                 ->andWhere(['=', 'amount' , $model->amount])
                 ->groupBy([ 'date_waybill', 'date_delivery'])
                 ->all();
@@ -155,7 +155,7 @@ class SiteController extends Controller
             $waybill = waybill::find()
                 ->select(['COUNT(id_providers)', 'waybill.date_waybill', 'date_delivery'])
                 ->from('waybill')
-                //->where(['and',['>=', 'waybill.date_waybill',  date('Y-m-d')],['>=', 'date_delivery',  date('Y-m-d')]])
+                ->where(['and',['>=', 'waybill.date_waybill',  date('Y-m-d')],['>=', 'date_delivery',  date('Y-m-d')]])
                 ->andWhere([ 'amount' => 50])
                 ->groupBy(['waybill.date_waybill', 'date_delivery'])
                 ->all();
@@ -189,6 +189,32 @@ class SiteController extends Controller
                 'req' => $req,
             ]
         );
+    }
+    public function actionZaprosthree()
+    {
+        $model = new Sale();
+        if($model->load(Yii::$app->request->post()) ) {
+            $req = sale::find()
+                ->select(['COUNT(id_client) AS id_client','store.name_details'])
+                ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
+                ->where(['between', 'dateSale', $model->dateStart, $model->dateEnd])
+                ->andWhere(['like', 'store.name_details', $model->nameDetails])
+                ->groupBy(['store.name_details'])
+                ->asArray()
+                ->all();
+        } else
+            $req = Sale::find()
+                ->select(['COUNT(id_client) AS id_client','store.name_details'])
+                ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
+                ->where(['between', 'dateSale', 2021-04-15, 2021-06-10])
+                ->andWhere(['like', 'store.name_details', 'Рулевая'])
+                ->groupBy(['store.name_details'])
+                ->all();
+
+        return $this->render('zaprosthree', [
+            'model' => $model,
+            'req' => $req,
+        ]);
     }
 }
 

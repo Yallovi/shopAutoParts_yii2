@@ -49,7 +49,7 @@ AppAsset::register($this);
                     ['label' => 'Информация', 'url' => ['/site/info']],
                     ['label' => 'Запрос 1', 'url' => ['/site/zaprosone']],
                     ['label' => 'Запрос 2', 'url' => ['/site/requesttwo']],
-                    ['label' => 'Лабораторная 3', 'url' => ['#']],
+                    ['label' => 'Запрос 3', 'url' => ['/site/zaprosthree']],
                 ]
             ],
             Yii::$app->user->isGuest ? (
