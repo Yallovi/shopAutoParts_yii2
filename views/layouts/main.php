@@ -46,10 +46,12 @@ AppAsset::register($this);
                 'options'=>['class'=>'dropdown'],
                 'template' => '<a href="{url}" class="url-class">{label}</a>',
                 'items' =>[
-                    ['label' => 'Информация', 'url' => ['/site/info']],
-                    ['label' => 'Запрос 1', 'url' => ['/site/zaprosone']],
-                    ['label' => 'Запрос 2', 'url' => ['/site/requesttwo']],
-                    ['label' => 'Запрос 3', 'url' => ['/site/zaprosthree']],
+                    ['label' => 'Информация', 'url' => ['/shop/info']],
+                    ['label' => 'Запрос 1', 'url' => ['/shop/zaprosone']],
+                    ['label' => 'Запрос 2', 'url' => ['/shop/requesttwo']],
+                    ['label' => 'Запрос 3', 'url' => ['/shop/zaprosthree']],
+                    ['label' => 'Запрос 4', 'url' => ['/shop/zaprosfour']],
+                    ['label' => 'Запрос 6', 'url' => ['/shop/lab']],
                 ]
             ],
             Yii::$app->user->isGuest ? (

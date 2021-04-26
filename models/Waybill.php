@@ -10,7 +10,7 @@ class Waybill extends ActiveRecord
 {
     public $date_w  = '2007-05-20';
     public $date_d = '2007-06-20';
-    public $amount ;
+    public $amount = '50';
     public $id_detalis;
 
     public function rules()
