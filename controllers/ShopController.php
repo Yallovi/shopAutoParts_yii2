@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use yii\base\Model;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\Response;
@@ -133,6 +134,10 @@ class ShopController extends Controller
                 ->groupBy(['id_detail','store.name_details'])
                 ->asArray()
                 ->all();
+            return $this->render('lab', [
+                'model' => $model,
+                'req' => $req,
+            ]);
         }
 
         $req = sale::find()
@@ -148,6 +153,30 @@ class ShopController extends Controller
             'model' => $model,
             'req' => $req,
         ]);
+    }
+
+    public function actionZaprosten()
+    {
+        $model = new Store();
+        if($model->load(Yii::$app->request->post()))
+        {
+            $req = Store::find()
+                ->select(['SUM(defectAmount) as defectAmount', 'name_details', 'waybill.id_providers'])
+                ->leftJoin('waybill', 'store.id_autoDetalis = waybill.id_detalis')
+                ->where(['=', 'waybill.date_delivery' , $model->dateStart])
+                ->groupBy(['name_details', 'waybill.id_providers'])
+                ->asArray()
+                ->all();
+        } else
+            $req = Store::find()
+                ->select(['SUM(defectAmount)', 'name_details', 'waybill.id_providers'])
+                ->leftJoin('waybill', 'store.id_autoDetalis = waybill.id_detalis')
+                ->where([ 'waybill.date_delivery' => 2007-06-20])
+                ->groupBy(['name_details', 'waybill.id_providers'])
+                ->asArray()
+                ->all();
+
+        return $this->render('zaprosten', ['model' => $model, 'req'=>$req]);
     }
 
 }
