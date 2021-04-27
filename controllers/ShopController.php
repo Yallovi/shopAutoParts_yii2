@@ -178,5 +178,23 @@ class ShopController extends Controller
 
         return $this->render('zaprosten', ['model' => $model, 'req'=>$req]);
     }
+    public function actionZaproseleven(){
+        $model = new Sale();
+        if($model->load(Yii::$app->request->post()))
+        {
+            $req = sale::find()
+                ->select(['SUM(amount) AS amount' , 'SUM(saleAmount) AS saleAmount'])
+                ->where(['=', 'dateSale' , $model->dateStart])
+                ->asArray()
+                ->all();
+        } else
+            $req = sale::find()
+                ->select(['SUM(amount) AS amount', 'SUM(saleAmount) AS saleAmount'])
+                ->where([ 'dateSale' => 2007-06-20])
+                ->asArray()
+                ->all();
+
+        return $this->render('zaproseleven', ['model' => $model, 'req'=>$req]);
+    }
 
 }
