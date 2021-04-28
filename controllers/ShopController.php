@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Orders;
 use yii\base\Model;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -42,13 +43,7 @@ class ShopController extends Controller
                 ->groupBy([ 'date_waybill', 'date_delivery'])
                 ->all();
         } else
-            $waybill = waybill::find()
-                ->select(['COUNT(id_providers)', 'waybill.date_waybill', 'date_delivery'])
-                ->from('waybill')
-                ->where(['and',['>=', 'waybill.date_waybill',  date('Y-m-d')],['>=', 'date_delivery',  date('Y-m-d')]])
-                ->andWhere([ 'amount' => 50])
-                ->groupBy(['waybill.date_waybill', 'date_delivery'])
-                ->all();
+            $waybill = [0=>['id_providers'=>null, 'date_waybill'=>null,'date_delivery'=>null]];
 
 //        $waybill = waybill::find()->where(['and',['=', 'date_waybill', date('Y-m-d')]])->all();
 
@@ -69,11 +64,12 @@ class ShopController extends Controller
                 ->all();
         }
         else
-            $req = waybill::find()
-                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
-                ->from('waybill')
-                ->where(['id_detalis' => 1 ])
-                ->all();
+           $req = [0=>['id_providers'=>null, 'date_waybill'=>null,'provider_price_piece'=>null]];
+//            $req = waybill::find()
+//                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
+//                ->from('waybill')
+//                ->where(['id_detalis' => 1 ])
+//                ->all();
 
         return $this->render('requesttwo', [
                 'model' => $model,
@@ -96,13 +92,14 @@ class ShopController extends Controller
 
         }
         else
-            $req = Sale::find()
-                ->select(['COUNT(id_client) AS id_client','store.name_details'])
-                ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
-                ->where(['between', 'dateSale', 2021-04-15, 2021-06-10])
-                ->andWhere(['like', 'store.name_details', 'Рулевая'])
-                ->groupBy(['store.name_details'])
-                ->all();
+            $req = [0=>['id_client'=>null, 'name_details'=>null]];
+//            $req = Sale::find()
+//                ->select(['COUNT(id_client) AS id_client','store.name_details'])
+//                ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
+//                ->where(['between', 'dateSale', 2021-04-15, 2021-06-10])
+//                ->andWhere(['like', 'store.name_details', 'Рулевая'])
+//                ->groupBy(['store.name_details'])
+//                ->all();
 
         return $this->render('zaprosthree', [
             'model' => $model,
@@ -124,8 +121,8 @@ class ShopController extends Controller
     public function actionLab(){
 
         $model = new Sale();
-        $model->load(Yii::$app->request->post());
-        if ($model->validate()) {
+    if($model->load(Yii::$app->request->post()) ){
+//        if ($model->validate()) {
             $req = Sale::find()
                 ->select(['id_detail','store.name_details','AVG(sale.saleAmount) AS saleAmount'])
                 ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
@@ -134,20 +131,21 @@ class ShopController extends Controller
                 ->groupBy(['id_detail','store.name_details'])
                 ->asArray()
                 ->all();
-            return $this->render('lab', [
-                'model' => $model,
-                'req' => $req,
-            ]);
-        }
+//            return $this->render('lab', [
+//                'model' => $model,
+//                'req' => $req,
+//            ]);
+        } else
 
-        $req = sale::find()
-            ->select(['id_detail','store.name_details','AVG(sale.saleAmount) AS saleAmount'])
-            ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
-            ->where(['between', 'dateSale', $model->dateStart, $model->dateEnd])
-            ->andWhere([ 'id_detail' => $model->idDetails])
-            ->groupBy(['id_detail','store.name_details'])
-            ->asArray()
-            ->all();
+        $req = [0=>['id_detail'=>null, 'name_details'=>null, 'saleAmount'=>null]];
+//        $req = sale::find()
+//            ->select(['id_detail','store.name_details','AVG(sale.saleAmount) AS saleAmount'])
+//            ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis' )
+//            ->where(['between', 'dateSale', $model->dateStart, $model->dateEnd])
+//            ->andWhere([ 'id_detail' => $model->idDetails])
+//            ->groupBy(['id_detail','store.name_details'])
+//            ->asArray()
+//            ->all();
 
         return $this->render('lab', [
             'model' => $model,
@@ -158,7 +156,7 @@ class ShopController extends Controller
     public function actionZaprosten()
     {
         $model = new Store();
-        if($model->load(Yii::$app->request->post()))
+        if($model->load(Yii::$app->request->post()) && $model->validate())
         {
             $req = Store::find()
                 ->select(['SUM(defectAmount) as defectAmount', 'name_details', 'waybill.id_providers'])
@@ -168,13 +166,14 @@ class ShopController extends Controller
                 ->asArray()
                 ->all();
         } else
-            $req = Store::find()
-                ->select(['SUM(defectAmount)', 'name_details', 'waybill.id_providers'])
-                ->leftJoin('waybill', 'store.id_autoDetalis = waybill.id_detalis')
-                ->where([ 'waybill.date_delivery' => 2007-06-20])
-                ->groupBy(['name_details', 'waybill.id_providers'])
-                ->asArray()
-                ->all();
+            $req = [0=>['defectAmount'=>null, 'name_details'=>null, 'id_providers'=>null]];
+//            $req = Store::find()
+//                ->select(['SUM(defectAmount)', 'name_details', 'waybill.id_providers'])
+//                ->leftJoin('waybill', 'store.id_autoDetalis = waybill.id_detalis')
+//                ->where([ 'waybill.date_delivery' => 2007-06-20])
+//                ->groupBy(['name_details', 'waybill.id_providers'])
+//                ->asArray()
+//                ->all();
 
         return $this->render('zaprosten', ['model' => $model, 'req'=>$req]);
     }
@@ -188,13 +187,59 @@ class ShopController extends Controller
                 ->asArray()
                 ->all();
         } else
-            $req = sale::find()
-                ->select(['SUM(amount) AS amount', 'SUM(saleAmount) AS saleAmount'])
-                ->where([ 'dateSale' => 2007-06-20])
-                ->asArray()
-                ->all();
+            $req = [0=>['amount'=>null, 'saleAmount'=>null]];
+//            $req = sale::find()
+//                ->select(['SUM(amount) AS amount', 'SUM(saleAmount) AS saleAmount'])
+//                ->where([ 'dateSale' => 2007-06-20])
+//                ->asArray()
+//                ->all();
 
         return $this->render('zaproseleven', ['model' => $model, 'req'=>$req]);
+    }
+
+    public function actionZaprossixteen()
+    {
+        $model = new Orders();
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            $req = orders::find()
+                ->select(['COUNT(idOrder) AS idOrder', 'SUM(price) AS price'])
+                ->where(['like', 'name_details', $model->nameDetails])
+                ->asArray()
+                ->all();
+        } else
+            $req = [0=>['idOrder'=>null, 'price'=>null]];
+//            $req = orders::find()
+//                ->select(['idOrder AS idOrder', 'price'])
+//                ->asArray()
+//                ->all();
+
+            return $this->render('zaprossixteen', [
+                'model' => $model,
+                'req' => $req,
+            ]);
+
+    }
+    public function actionZaprosfive()
+    {
+        $model = Sale::find()
+            -> select(['store.name_details', 'MAX(amount) AS amount'])
+            ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis')
+            ->groupBy('store.name_details')
+            ->orderBy('MAX(amount) ASC')
+            ->limit(2)
+            ->asArray()
+            ->all();
+
+        $req =  Waybill::find()
+            ->select(['providers.name','MIN(provider_price_piece) as provider_price_piece'])
+            ->leftJoin('providers', 'waybill.id_providers = providers.id' )
+            ->groupBy('providers.name')
+            ->orderBy('MIN(provider_price_piece) ASC')
+            ->limit(3)
+            ->asArray()
+            ->all();
+
+        return $this->render('zaprosfive', ['model' => $model, 'req' => $req]);
     }
 
 }

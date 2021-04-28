@@ -18,7 +18,7 @@ $this->title = "Запрос 6";
     <tr>
         <th>Id detail</th>
         <th>Название детали</th>
-        <th>Количество  продажи</th>
+        <th>Среднее число продажи</th>
     </tr>
     <?php
     foreach ($req as $request): ?>

@@ -51,9 +51,11 @@ AppAsset::register($this);
                     ['label' => 'Запрос 2', 'url' => ['/shop/requesttwo']],
                     ['label' => 'Запрос 3', 'url' => ['/shop/zaprosthree']],
                     ['label' => 'Запрос 4', 'url' => ['/shop/zaprosfour']],
+                    ['label' => 'Запрос 5', 'url' => ['/shop/zaprosfive']],
                     ['label' => 'Запрос 6', 'url' => ['/shop/lab']],
                     ['label' => 'Запрос 10', 'url' => ['/shop/zaprosten']],
                     ['label' => 'Запрос 11', 'url' => ['/shop/zaproseleven']],
+                    ['label' => 'Запрос 16', 'url' => ['/shop/zaprossixteen']],
                 ]
             ],
             Yii::$app->user->isGuest ? (
