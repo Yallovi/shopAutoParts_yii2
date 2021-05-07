@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 10";
 ?>
-
+<h2>10.Получить перечень и общее количество бракованного товара, пришедшего за определенный период и список поставщиков, поставивших товар. </h2>
+<br>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form -> field($model,  'dateStart')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
 <?php //echo $form -> field($model,  'dateEnd')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
@@ -27,7 +28,7 @@ $this->title = "Запрос 10";
         <tr>
             <td><?= $request['defectAmount'] ?></td>
             <td><?= $request['name_details'] ?></td>
-            <td><?= $request['id_providers']?></td>
+            <td><?= $request['name']?></td>
         </tr>
     <?php endforeach; ?>
 </table>

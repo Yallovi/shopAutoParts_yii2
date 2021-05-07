@@ -22,15 +22,15 @@ $this->title = "Запрос 5";
 
 <table class="table table-bordered">
     <tr>
-        <th>Название Детали</th>
-        <th> Количество проданных деталей</th>
+        <th>Наименовании поставщиков</th>
+        <th>Цена деталей за штуку</th>
 
     </tr>
     <?php
     foreach ($req as $request): ?>
         <tr>
             <td><?= $request['name'] ?></td>
-            <td><?= $request['provider_price_piece']?></td>
+            <td><?= $request['provider_price_piece']?> руб.</td>
         </tr>
     <?php endforeach; ?>
 </table>

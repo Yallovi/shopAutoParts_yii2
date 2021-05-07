@@ -63,9 +63,10 @@ class ShopController extends Controller
         $model = new Waybill();
         if ($model->load(Yii::$app->request->post())) {
             $req = waybill::find()
-                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
-                ->from('waybill')
+                ->select(['providers.name', 'date_delivery', 'provider_price_piece'])
+                ->innerJoin('providers', 'waybill.id_providers = providers.id')
                 ->where(['id_detalis' => $model->id_detalis])
+                ->asArray()
                 ->all();
         } else
             $req = [0 => ['id_providers' => null, 'date_waybill' => null, 'provider_price_piece' => null]];
@@ -115,7 +116,7 @@ class ShopController extends Controller
     {
         $model = new Store();
         $req = store::find()
-            ->select(['amountDetalis', 'cell_number'])
+            ->select(['cell_number', 'cell_size'])
             ->from('store')
             ->all();
 
@@ -132,11 +133,11 @@ class ShopController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 //        if ($model->validate()) {
             $req = Sale::find()
-                ->select(['id_detail', 'store.name_details', 'AVG(sale.saleAmount) AS saleAmount'])
+                ->select(['id_detail', 'store.name_details', 'ROUND(((sale.saleAmount)/30),0) AS saleAmount'])
                 ->leftJoin('store', 'sale.id_detail = store.id_autoDetalis')
                 ->where(['between', 'dateSale', $model->dateStart, $model->dateEnd])
                 ->andWhere(['id_detail' => $model->idDetails])
-                ->groupBy(['id_detail', 'store.name_details'])
+//                ->groupBy(['id_detail', 'store.name_details'])
                 ->asArray()
                 ->all();
 //            return $this->render('lab', [
@@ -166,10 +167,11 @@ class ShopController extends Controller
         $model = new Store();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $req = Store::find()
-                ->select(['SUM(defectAmount) as defectAmount', 'name_details', 'waybill.id_providers'])
+                ->select(['SUM(defectAmount) as defectAmount', 'name_details', 'providers.name'])
                 ->leftJoin('waybill', 'store.id_autoDetalis = waybill.id_detalis')
+                ->innerJoin('providers', 'store.id_autoDetalis = providers.id')
                 ->where(['=', 'waybill.date_delivery', $model->dateStart])
-                ->groupBy(['name_details', 'waybill.id_providers'])
+                ->groupBy(['name_details', 'providers.name'])
                 ->asArray()
                 ->all();
         } else
@@ -272,8 +274,9 @@ class ShopController extends Controller
         $model = new Waybill();
         if($model->load(Yii::$app->request->post()) ) {
             $req = Waybill::find()
-            ->select(['waybill.id_providers,ROUND(((sale.saleAmount)/(waybill.provider_price_piece*waybill.amount)*100),1)  AS share_goods'])
+            ->select(['providers.name,ROUND(((sale.saleAmount)/(waybill.provider_price_piece*waybill.amount)*100),1)  AS share_goods'])
                 ->innerJoin('sale', 'waybill.id_detalis = sale.id_detail')
+                ->innerJoin('providers', 'waybill.id_detalis = providers.id')
                 ->where(['waybill.id_providers' => $model->id_provider])
                 ->andWhere(['between', 'sale.dateSale', $model->date_start, $model->date_end])
                 ->asArray()

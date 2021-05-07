@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->title = "Запрос 13";
+$this->title = "Запрос 14";
 ?>
 <h2>Получить скорость оборота денежных средств, вложенных в товар (как товар быстро продается). </h2>
 

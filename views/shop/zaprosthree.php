@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 3";
 ?>
-
+<h3>3.	Получить перечень и общее число покупателей, купивших указанный вид товара за некоторый период, либо сделавших покупку товара в объеме, не менее указанного</h3>
+<br>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form -> field($model,  'dateStart')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
 <?php echo $form -> field($model,  'dateEnd')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>

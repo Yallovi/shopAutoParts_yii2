@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->title = "Запрос 13";
+$this->title = "Запрос 12";
 ?>
 <h2>кассовый отчет</h2>
 

@@ -4,8 +4,6 @@ use yii\widgets\ActiveForm;
 $this->title = "Запрос 15";
 ?>
 
-
-
 <table class="table table-bordered">
     <tr>
         <th>№ ячейки</th>

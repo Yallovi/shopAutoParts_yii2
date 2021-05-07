@@ -3,6 +3,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 6";
 ?>
+
+<h2>6.	Получить среднее число продаж на месяц по любому виду деталей. </h2>
+<br>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form -> field($model,  'dateStart')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
 <?php echo $form -> field($model,  'dateEnd')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
@@ -18,14 +21,14 @@ $this->title = "Запрос 6";
     <tr>
         <th>Id detail</th>
         <th>Название детали</th>
-        <th>Среднее число продажи</th>
+        <th>Среднее число продаж за месяц  (руб.)</th>
     </tr>
     <?php
     foreach ($req as $request): ?>
         <tr>
             <td><?= $request['id_detail'] ?></td>
             <td><?= $request['name_details']?></td>
-            <td><?= $request['saleAmount']?></td>
+            <td><?= $request['saleAmount']?> руб.</td>
         </tr>
     <?php endforeach; ?>
 

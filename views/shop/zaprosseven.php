@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 7";
 ?>
-
+<h2>7.	Получить долю товара конкретного поставщика в процентах, деньгах, единицах от всего оборота магазина прибыль магазина за указанный период. </h2>
+<br>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form -> field($model,  'date_start')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
 <?php echo $form -> field($model,  'date_end')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
@@ -17,14 +18,14 @@ $this->title = "Запрос 7";
 
 <table class="table table-bordered">
     <tr>
-        <th>№ провайдера</th>
+        <th>Наименование провайдера</th>
         <th>Доля товара конкретного поставщика </th>
 
     </tr>
     <?php
     foreach ($req as $request): ?>
         <tr>
-            <td><?= $request['id_providers'] ?></td>
+            <td><?= $request['name'] ?></td>
             <td><?= $request['share_goods']?>%</td>
         </tr>
     <?php endforeach; ?>

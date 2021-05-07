@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 11";
 ?>
-
+<h2>11.	Получить перечень, общее количество и стоимость товара, реализованного за конкретный день. </h2>
+<br>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form -> field($model,  'dateStart')->textInput(['type'=> 'date'])->label('Дата Продажа')  ?>
 

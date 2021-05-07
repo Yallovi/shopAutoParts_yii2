@@ -3,18 +3,19 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = "Запрос 4";
 ?>
-
+<h2>4.	Получить перечень, объем и номер ячейки для всех деталей, хранящихся на складе</h2>
+<br>
 <table class="table table-bordered">
     <tr>
-        <th>Количество деталей на складе</th>
         <th>№ ячейки</th>
+        <th>Объем ячейки. Сколько может вместить деталей (шт.)</th>
 
     </tr>
     <?php
     foreach ($req as $request): ?>
         <tr>
-            <td><?= $request->amountDetalis ?></td>
-            <td><?= $request->cell_number?></td>
+            <td><?= $request->cell_number ?></td>
+            <td><?= $request->cell_size?></td>
         </tr>
     <?php endforeach; ?>
 </table>
