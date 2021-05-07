@@ -13,6 +13,7 @@ use app\models\ContactForm;
 use app\models\Waybill;
 use app\models\Sale;
 use app\models\Store;
+use app\models\SignupForm;
 
 use yii\db\Query;
 
@@ -68,6 +69,23 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 
     /**
