@@ -149,6 +149,18 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function init()
+    {
+        if(!Yii::$app->db->isActive) {
+            // The connection does not exist.
+        }
+
+        parent::init();
+    }
+    public function actionAdmin()
+    {
+        return $this->render('admin');
+    }
 //    public function actionInfo()
 //    {
 //        return $this->render('info');

@@ -41,12 +41,13 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Запросы',
+            ['label' => 'Список',
                 'url' => ['#'],
                 'options'=>['class'=>'dropdown'],
                 'template' => '<a href="{url}" class="url-class">{label}</a>',
                 'items' =>[
                     ['label' => 'Информация', 'url' => ['/shop/info']],
+                    ['label' => 'Админка', 'url' => ['site/admin']],
                     ['label' => 'Запрос 1', 'url' => ['/shop/zaprosone']],
                     ['label' => 'Запрос 2', 'url' => ['/shop/requesttwo']],
                     ['label' => 'Запрос 3', 'url' => ['/shop/zaprosthree']],
@@ -66,10 +67,11 @@ AppAsset::register($this);
                 ]
             ],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Админка', 'url' => ['/site/login']]
+                ['label' => 'авторизация', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
+
                 . Html::submitButton(
                     'Выйти из (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
