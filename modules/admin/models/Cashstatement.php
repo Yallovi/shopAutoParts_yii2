@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $date
+ * @property string $FIO
  * @property float $sumStartDay
  * @property float $sumLastDay
  * @property int $idEmployee
@@ -32,7 +33,7 @@ class Cashstatement extends \yii\db\ActiveRecord
     {
         return [
             [['date', 'sumStartDay', 'sumLastDay', 'idEmployee'], 'required'],
-            [['date'], 'safe'],
+            [['date','FIO'], 'safe'],
             [['sumStartDay', 'sumLastDay'], 'number'],
             [['idEmployee'], 'integer'],
             [['idEmployee'], 'exist', 'skipOnError' => true, 'targetClass' => Employees::className(), 'targetAttribute' => ['idEmployee' => 'idemployee']],
@@ -58,8 +59,10 @@ class Cashstatement extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdEmployee0()
+    public function getEmployees()
     {
         return $this->hasOne(Employees::className(), ['idemployee' => 'idEmployee']);
     }
+
+
 }

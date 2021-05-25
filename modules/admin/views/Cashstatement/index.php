@@ -1,41 +1,59 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+            use yii\helpers\Html;
+            use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\CashstatementSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+            /* @var $this yii\web\View */
+            /* @var $searchModel app\modules\admin\models\CashstatementSearch */
+            /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Кассовый отчет';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<a class="btn" href="../index.php/admin" role="button">Админка</a>
-<div class="cashstatement-index">
+            $this->title = 'Кассовый отчет';
+            $this->params['breadcrumbs'][] = $this->title;
+            ?>
+            <button style=" margin-top: 100px" class="btn">
+                <a class="btn" href="../admin" role="button">Админка</a>
+            </button>
 
-    <h1>Кассовый отчет</h1>
+            <div class="cashstatement-index">
 
-    <p>
-        <?= Html::a('Добавить Кассовый отчет', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <h1>Кассовый отчет</h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <p>
+                    <?= Html::a('Добавить Кассовый отчет', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            'id',
-            'date',
-            'sumStartDay',
-            'sumLastDay',
-            'idEmployee',
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'rowOptions' => function($model, $key, $index, $column){
+                        if($index % 2 == 0){
+                            return ['style' => 'background-color:#000;'];
+                        }
+                    },
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                        ['attribute' => 'id','label' => 'ID'],
+                        ['attribute' => 'date','label' => 'Дата составления кассового отчета'],
+                        ['attribute' => 'sumStartDay','label' => 'Сумма в кассе в начале дня'],
+                        ['attribute' => 'sumLastDay','label' => 'Сумма в кассе в конце дня'],
+                        ['attribute' => 'employees.FIO','label' => 'ФИО сотрудника'],
+
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
 
 
-</div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+
+

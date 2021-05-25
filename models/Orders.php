@@ -8,7 +8,7 @@ use yii\db\ActiveRecord;
 
 class Orders extends  ActiveRecord
 {
-    public $nameDetails;
+    public $nameDetails = 'Рулевая тяга';
 
     public function rules()
     {

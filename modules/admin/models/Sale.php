@@ -13,6 +13,11 @@ use Yii;
  * @property int $saleAmount
  * @property int $id_sale
  * @property int $id_client
+ * @property float $name_details;
+ * @property string $surname
+ * @property string $name
+ * @property string $lastname
+ *
  *
  * @property Store $detail
  * @property Clientsbase $client
@@ -34,7 +39,7 @@ class Sale extends \yii\db\ActiveRecord
     {
         return [
             [['dateSale', 'id_detail', 'amount', 'saleAmount', 'id_client'], 'required'],
-            [['dateSale'], 'safe'],
+            [['dateSale'.'name_details','surname','name','lastname'], 'safe'],
             [['id_detail', 'amount', 'saleAmount', 'id_client'], 'integer'],
             [['id_detail'], 'exist', 'skipOnError' => true, 'targetClass' => Store::className(), 'targetAttribute' => ['id_detail' => 'id_autoDetalis']],
             [['id_client'], 'exist', 'skipOnError' => true, 'targetClass' => Clientsbase::className(), 'targetAttribute' => ['id_client' => 'id_client']],
@@ -61,7 +66,7 @@ class Sale extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDetail()
+    public function getDetails()
     {
         return $this->hasOne(Store::className(), ['id_autoDetalis' => 'id_detail']);
     }
@@ -71,7 +76,7 @@ class Sale extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getClient()
+    public function getClients()
     {
         return $this->hasOne(Clientsbase::className(), ['id_client' => 'id_client']);
     }

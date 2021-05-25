@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => '3DGLO',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -38,9 +38,6 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Список',
                 'url' => ['#'],
                 'options'=>['class'=>'dropdown'],
@@ -67,7 +64,7 @@ AppAsset::register($this);
                 ]
             ],
             Yii::$app->user->isGuest ? (
-                ['label' => 'авторизация', 'url' => ['/site/login']]
+            ['label' => 'Авторизация', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -85,22 +82,59 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
         <?= $content ?>
-    </div>
-</div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+    <div class="footer">
+        <div class="container">
+            <div class="row d-flex align-items-baseline">
+                <div class="col-lg-3 col-md-4 mb-3 mb-md-0">
+                    <div class="footer-contacts-block"><a href="#" class="footer-link"></a><!-- /.footer-logo -->
+                        <div class="footer-contacts-block__info mb-4">Дворянская ул., 1А, Владимир, Россия</div>
+                        <!-- /.contacts-block__info -->
+                        <div class="footer-contacts-block__info mb-4">998 99 420 00 16</div>
+                        <!-- /.contacts-block__info -->
+                        <div class="footer-contacts-block__info mb-4">3DGLO@rambler.kz</div>
+                        <!-- /.contacts-block__info -->
+                    </div><!-- /.contacts-block -->
+                </div><!-- /.col-3 -->
+                <div class="col-lg-2 col-md-4 mb-3 mb-md-0">
+                    <div class="footer-menu"><span class="footer-menu__title">Меню</span><!-- /.footer-nemu__title -->
+                        <ul class="footer-menu-navigation">
+                            <li class="footer-menu-item mb-3">О нас</li><!-- /.footer-menu-link -->
+                            <li class="footer-menu-item mb-3">Проекты</li><!-- /.footer-menu-link -->
+                            <li class="footer-menu-item mb-3">Готовые решение</li><!-- /.footer-menu-link -->
+                            <li class="footer-menu-item mb-3">Контакты</li><!-- /.footer-menu-link -->
+                        </ul><!-- /.footer-menu-item -->
+                    </div><!-- /.footer-menu -->
+                </div><!-- /.col-2 -->
+                <div class="col-lg-2 col-md-4">
+                    <div class="footer-menu"><span class="footer-menu__title">Услуги</span><!-- /.footer-services -->
+                        <ul class="footer-menu-navigation">
+                            <li class="footer-menu-item mb-3">Все направоение архитектуры</li>
+                            <!-- /.footer-services-link -->
+                            <li class="footer-menu-item mb-3">Экстрьер дизайн</li><!-- /.footer-services-link -->
+                            <li class="footer-menu-item mb-3">Интерьер дизайн</li><!-- /.footer-services-link -->
+                            <li class="footer-menu-item mb-3">Визуализация</li><!-- /.footer-services-link -->
+                        </ul><!-- /.footer-menu-item -->
+                    </div><!-- /.footer-menu -->
+                </div><!-- /.col-2 -->
+                <div class="col-lg-5 align-self-center mt-5 mt-lg-0">
+                    <div class="footer-news"><span class="footer-news__title">Новостная рассылка</span>
+                        <!-- /.footer-news__title -->
+                        <p class="footer-news__text">Подписайся Будь в курсу о нас, о наших новый проектов а также
+                            готовых решение</p><!-- /.footer-news__text -->
+                        <form action="#" class="footer-news__form d-flex justify-content-between"><input type="email"
+                                                                                                         class="footer-news__form__input" placeholder="Ваша почта"> <button
+                                    class="footer-news__form__button">Подписаться</button><!-- /.form-button -->
+                        </form><!-- /.footer-news__form -->
+                    </div><!-- /.footer-news -->
+                </div><!-- /.col-4 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div><!-- /.footer -->
 
 <?php $this->endBody() ?>
 </body>

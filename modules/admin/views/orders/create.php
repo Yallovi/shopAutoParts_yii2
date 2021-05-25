@@ -1,20 +1,32 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <?php
 
-use yii\helpers\Html;
+            use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Orders */
+            /* @var $this yii\web\View */
+            /* @var $model app\modules\admin\models\Orders */
 
-$this->title = 'Create Orders';
-$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="orders-create">
+            $this->title = 'Добавить Заказ';
+            $this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
+            $this->params['breadcrumbs'][] = $this->title;
+            ?>
+            <div style=" margin-top: 100px" class="orders-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
 
-</div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+

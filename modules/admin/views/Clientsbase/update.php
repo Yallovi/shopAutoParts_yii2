@@ -1,21 +1,34 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
 
-use yii\helpers\Html;
+            <?php
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Clientsbase */
+            use yii\helpers\Html;
 
-$this->title = 'Update Clientsbase: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Clientsbases', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id_client]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="clientsbase-update">
+            /* @var $this yii\web\View */
+            /* @var $model app\modules\admin\models\Clientsbase */
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            $this->title = 'Редактировать клиента: ' . $model->name;
+            $this->params['breadcrumbs'][] = ['label' => 'Клиенты', 'url' => ['index']];
+            $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id_client]];
+            $this->params['breadcrumbs'][] = 'Редактировать';
+            ?>
+            <div style="margin-top: 100px" class="clientsbase-update">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+                <h1><?= Html::encode($this->title) ?></h1>
 
-</div>
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
+
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+

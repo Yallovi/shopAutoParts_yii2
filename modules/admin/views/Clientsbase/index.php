@@ -1,42 +1,67 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+            use yii\helpers\Html;
+            use yii\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ClientsbaseSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+            /* @var $this yii\web\View */
+            /* @var $searchModel app\modules\admin\models\ClientsbaseSearch */
+            /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Клиенты';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<a class="btn" href="../index.php/admin" role="button">Админка</a>
-<div class="clientsbase-index">
+            $this->title = 'Клиенты';
+            $this->params['breadcrumbs'][] = $this->title;
+            ?>
+            <button style=" margin-top: 100px" class="btn">
+                <a class="btn" href="../admin" role="button">Админка</a>
+            </button>
 
-    <h1>Клиенты</h1>
+            <div class="clientsbase-index">
 
-    <p>
-        <?= Html::a('Добавить Клиента', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <h1>Клиенты</h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <p>
+                    <?= Html::a('Добавить Клиента', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            'id_client',
-            'surname',
-            'name',
-            'lastName',
-            'phone',
-            //'car',
+                <?= GridView::widget([
+                    'id' => 'scan-batch-grid',
+                    'dataProvider' => $dataProvider,
+                    'rowOptions' => function($model, $key, $index, $column){
+                        if($index % 2 == 0){
+                            return ['style' => 'background-color:#000;'];
+                        }
+                    },
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                        ['attribute' => 'id_client','label' => 'ID клиента'],
+                        ['attribute' => 'surname','label' => 'Отчество'],
+                        ['attribute' => 'name','label' => 'Имя'],
+                        ['attribute' => 'lastName','label' => 'Фамилия'],
+                        ['attribute' => 'phone','label' => 'Номер телефона'],
+                        ['attribute' => 'car','label' => 'Машина'],
+//            'id_client',
+//            'surname',
+//            'name',
+//            'lastName',
+//            'phone',
+                        //'car',
+
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
 
 
-</div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+
+

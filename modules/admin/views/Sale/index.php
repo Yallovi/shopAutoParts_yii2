@@ -1,42 +1,62 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+        </div>
+        <!-- /.row -->
+        <?php
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\SaleSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+        use yii\helpers\Html;
+        use yii\grid\GridView;
 
-$this->title = 'Продажи';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<a class="btn" href="../index.php/admin" role="button">Админка</a>
-<div class="sale-index">
+        /* @var $this yii\web\View */
+        /* @var $searchModel app\modules\admin\models\SaleSearch */
+        /* @var $dataProvider yii\data\ActiveDataProvider */
 
-    <h1>Продажи</h1>
+        $this->title = 'Продажи';
+        $this->params['breadcrumbs'][] = $this->title;
+        ?>
+        <button style=" margin-top: 100px" class="btn">
+            <a class="btn" href="../admin" role="button">Админка</a>
+        </button>
+        <div class="sale-index">
 
-    <p>
-        <?= Html::a('Добавить Продажу', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+            <h1>Продажи</h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+            <p>
+                <?= Html::a('Добавить Продажу', ['create'], ['class' => 'btn btn-success']) ?>
+            </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            'dateSale',
-            'id_detail',
-            'amount',
-            'saleAmount',
-            'id_sale',
-            //'id_client',
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'rowOptions' => function($model, $key, $index, $column){
+                    if($index % 2 == 0){
+                        return ['style' => 'background-color:#000;'];
+                    }
+                },
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['attribute' => 'id_sale','label' => 'ID продажи'],
+                    ['attribute' => 'dateSale','label' => 'Дата продажи'],
+                    ['attribute' => 'details.name_details','label' => 'Название детали'],
+                    ['attribute' => 'amount','label' => 'Количество проданных деталей'],
+                    ['attribute' => 'saleAmount','label' => 'Сумма продажи'],
+                    ['attribute' => 'clients.surname','label' => 'Покупателей'],
 
 
-</div>
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.container -->
+

@@ -1,20 +1,31 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
 
-use yii\helpers\Html;
+            <?php
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Providers */
+            use yii\helpers\Html;
 
-$this->title = 'Create Providers';
-$this->params['breadcrumbs'][] = ['label' => 'Providers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="providers-create">
+            /* @var $this yii\web\View */
+            /* @var $model app\modules\admin\models\Providers */
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            $this->title = 'Добавить поставшика';
+            $this->params['breadcrumbs'][] = ['label' => 'Providers', 'url' => ['index']];
+            $this->params['breadcrumbs'][] = $this->title;
+            ?>
+            <div style=" margin-top: 100px" class="providers-create">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+                <h1><?= Html::encode($this->title) ?></h1>
 
-</div>
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+

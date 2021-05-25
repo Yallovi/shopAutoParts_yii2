@@ -14,6 +14,10 @@ use Yii;
  * @property string $numberOrder
  * @property string $price
  * @property string $name_details
+ * @property string $FIO
+ * @property string $surname
+ * @property string $name
+ * @property string $lastname
  *
  * @property Detailsorder[] $detailsorders
  * @property Clientsbase $client
@@ -36,7 +40,7 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             [['dateOrder', 'id_employee', 'id_client', 'numberOrder', 'price', 'name_details'], 'required'],
-            [['dateOrder'], 'safe'],
+            [['dateOrder','FIO','surname','name','lastname'], 'safe'],
             [['id_employee', 'id_client'], 'integer'],
             [['numberOrder'], 'string', 'max' => 15],
             [['price', 'name_details'], 'string', 'max' => 30],
@@ -76,7 +80,7 @@ class Orders extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getClient()
+    public function getClients()
     {
         return $this->hasOne(Clientsbase::className(), ['id_client' => 'id_client']);
     }
@@ -86,7 +90,7 @@ class Orders extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployee()
+    public function getEmployees()
     {
         return $this->hasOne(Employees::className(), ['idemployee' => 'id_employee']);
     }

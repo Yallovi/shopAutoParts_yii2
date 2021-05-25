@@ -12,18 +12,17 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'FIO')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'FIO')->textInput(['maxlength' => true])->label('ФИО') ?>
 
-    <?= $form->field($model, 'dateBrithday')->textInput() ?>
+    <?= $form->field($model, 'dateBrithday')->textInput()->label('Дата рождения') ?>
 
-    <?= $form->field($model, 'salary')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'salary')->textInput(['maxlength' => true])->label('Зарплата') ?>
 
-    <?= $form->field($model, 'post')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'post')->textInput(['maxlength' => true])->label('Должность') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

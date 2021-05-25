@@ -12,26 +12,27 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
+    <?= $form->field($model, 'id')->textInput()->label('ID') ?>
 
-    <?= $form->field($model, 'inspectors_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'inspectors_name')->textInput(['maxlength' => true])->label('ФИО инспектора') ?>
 
-    <?= $form->field($model, 'dateStart')->textInput() ?>
+    <?= $form->field($model, 'dateStart')->textInput()->label('дата начала проверки') ?>
 
-    <?= $form->field($model, 'dateEnd')->textInput() ?>
+    <?= $form->field($model, 'dateEnd')->textInput() ->label('дата конец проверки')?>
 
-    <?= $form->field($model, 'actualAmount')->textInput() ?>
+    <?= $form->field($model, 'actualAmount')->textInput()->label('Количество в настоящее время') ?>
 
-    <?= $form->field($model, 'actualCost')->textInput() ?>
+    <?= $form->field($model, 'actualCost')->textInput()->label('Сумма в настоящее время') ?>
 
-    <?= $form->field($model, 'accountingAmount')->textInput() ?>
+    <?= $form->field($model, 'accountingAmount')->textInput() ->label('Количество по бух учету')?>
 
-    <?= $form->field($model, 'accountingCost')->textInput() ?>
+    <?= $form->field($model, 'accountingCost')->textInput() ->label('Сумма по бух учету')?>
 
-    <?= $form->field($model, 'name_details')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name_details')->textInput(['maxlength' => true]) ->label('Название детали')?>
+
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

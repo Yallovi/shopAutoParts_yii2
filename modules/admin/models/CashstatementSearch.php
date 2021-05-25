@@ -18,7 +18,7 @@ class CashstatementSearch extends Cashstatement
     {
         return [
             [['id', 'idEmployee'], 'integer'],
-            [['date'], 'safe'],
+            [['date','FIO'], 'safe'],
             [['sumStartDay', 'sumLastDay'], 'number'],
         ];
     }
@@ -43,6 +43,7 @@ class CashstatementSearch extends Cashstatement
     {
         $query = Cashstatement::find();
 
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -64,7 +65,8 @@ class CashstatementSearch extends Cashstatement
             'sumStartDay' => $this->sumStartDay,
             'sumLastDay' => $this->sumLastDay,
             'idEmployee' => $this->idEmployee,
-        ]);
+        ])
+        ;
 
         return $dataProvider;
     }

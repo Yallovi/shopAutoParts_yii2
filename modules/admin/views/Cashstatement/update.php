@@ -1,21 +1,33 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
 
-use yii\helpers\Html;
+            <?php
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Cashstatement */
+            use yii\helpers\Html;
 
-$this->title = 'Update Cashstatement: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Cashstatements', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<div class="cashstatement-update">
+            /* @var $this yii\web\View */
+            /* @var $model app\modules\admin\models\Cashstatement */
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            $this->title = 'Редактировать Кассовый отчет: ' . $model->id;
+            $this->params['breadcrumbs'][] = ['label' => 'Cashstatements', 'url' => ['index']];
+            $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+            $this->params['breadcrumbs'][] = 'Редактировать';
+            ?>
+            <div style="margin-top: 100px" class="cashstatement-update">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+                <h1><?= Html::encode($this->title) ?></h1>
 
-</div>
+                <?= $this->render('_form', [
+                    'model' => $model,
+                ]) ?>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+

@@ -15,6 +15,8 @@ use Yii;
  * @property int $amount
  * @property string $date_delivery
  * @property float $waybill_cost
+ * @property float $name;
+ * @property float $name_details;
  *
  * @property Store $store
  * @property Providers $providers
@@ -36,7 +38,7 @@ class Waybill extends \yii\db\ActiveRecord
     {
         return [
             [['date_waybill', 'id_providers', 'provider_price_piece', 'id_detalis', 'amount', 'date_delivery', 'waybill_cost'], 'required'],
-            [['date_waybill', 'date_delivery'], 'safe'],
+            [['date_waybill', 'date_delivery','name','name_details'], 'safe'],
             [['id_providers', 'id_detalis', 'amount'], 'integer'],
             [['waybill_cost'], 'number'],
             [['provider_price_piece'], 'string', 'max' => 30],

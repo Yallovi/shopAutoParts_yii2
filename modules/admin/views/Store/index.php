@@ -1,44 +1,62 @@
-<?php
+<section class="main">
+    <div class="container">
+        <div class="row">
 
-use yii\helpers\Html;
-use yii\grid\GridView;
+            <?php
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\StoreSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+            use yii\helpers\Html;
+            use yii\grid\GridView;
 
-$this->title = 'Склад';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<a class="btn" href="../index.php/admin" role="button">Админка</a>
-<div class="store-index">
+            /* @var $this yii\web\View */
+            /* @var $searchModel app\modules\admin\models\StoreSearch */
+            /* @var $dataProvider yii\data\ActiveDataProvider */
 
-    <h1>Склад</h1>
+            $this->title = 'Склад';
+            $this->params['breadcrumbs'][] = $this->title;
+            ?>
+            <button style=" margin-top: 100px" class="btn">
+                <a class="btn" href="../admin" role="button">Админка</a>
+            </button>
+            <div class="store-index">
 
-    <p>
-        <?= Html::a('Добавить информацию на склад', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                <h1>Склад</h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                <p>
+                    <?= Html::a('Добавить информацию на склад', ['create'], ['class' => 'btn btn-success']) ?>
+                </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+                <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-            'id_autoDetalis',
-            'amountDetalis',
-            'store_price_piece',
-            'name_details',
-            'defectAmount',
-            //'date_delivery',
-            //'cell_number',
-            //'cell_size',
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'rowOptions' => function($model, $key, $index, $column){
+                        if($index % 2 == 0){
+                            return ['style' => 'background-color:#000;'];
+                        }
+                    },
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                        ['attribute' => 'id_autoDetalis','label' => 'ID детали'],
+                        ['attribute' => 'amountDetalis','label' => 'Количество деталь'],
+                        ['attribute' => 'store_price_piece','label' => 'Цена магазина за штуку'],
+                        ['attribute' => 'name_details','label' => 'Название детали'],
+                        ['attribute' => 'defectAmount','label' => 'Количетсво бракованных'],
+                        ['attribute' => 'date_delivery','label' => 'Дата поставки'],
+                        ['attribute' => 'cell_number','label' => 'Номер ячейки'],
+                        ['attribute' => 'cell_size','label' => 'Размер ячейки'],
+
+                        ['class' => 'yii\grid\ActionColumn'],
+                    ],
+                ]); ?>
 
 
-</div>
+            </div>
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /.main -->
+
