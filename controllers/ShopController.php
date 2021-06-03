@@ -9,6 +9,8 @@ use app\models\inventory;
 use app\models\Orders;
 use phpDocumentor\Reflection\Types\Null_;
 use yii\base\Model;
+use yii\data\ArrayDataProvider;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\Response;
@@ -68,8 +70,11 @@ class ShopController extends Controller
                 ->where(['id_detalis' => $model->id_detalis])
                 ->asArray()
                 ->all();
+
+
         } else
             $req = [0 => ['id_providers' => null, 'date_waybill' => null, 'provider_price_piece' => null]];
+
 //            $req = waybill::find()
 //                ->select(['id_providers', 'date_waybill', 'provider_price_piece'])
 //                ->from('waybill')
@@ -315,9 +320,31 @@ class ShopController extends Controller
         $model = new Inventory();
         $req = inventory::find()->all();
 
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $req,
+            'pagination' => [
+                'pageSize' => 1,
+                'forcePageParam' => false,
+                'pageSizeParam' => false,
+            ]
+        ]);
+
+//        $pagination = new Pagination([
+//            'defaultPageSize' => 1,
+//            'totalCount' => $req->count(),
+//            'forcePageParam' => false,
+//            'pageSizeParam' => false,
+//
+//        ]);
+//
+//        $req = $req->offset($pagination->offset)
+//            ->limit($pagination->limit)->all();
+
         return $this->render('zaprosthirteen', [
            'model' => $model,
            'req' => $req,
+            'dataProvider' => $dataProvider,
+//            'pagination' => $pagination,
         ]);
     }
     public function actionZaprostwelve()

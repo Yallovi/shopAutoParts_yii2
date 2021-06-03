@@ -4,6 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\Providers;
 use app\modules\admin\models\Store;
+use yii\widgets\LinkPager;
 
 $this->title ='Запрос 2';
 ?>
@@ -24,6 +25,8 @@ $this->title ='Запрос 2';
 
             <?php ActiveForm::end(); ?>
 
+
+
             <table class="table table-bordered">
                 <tr>
                     <th>Наименование поставщика</th>
@@ -39,6 +42,8 @@ $this->title ='Запрос 2';
                     </tr>
                 <?php endforeach; ?>
             </table>
+
+
         </div>
         <!-- /.row -->
     </div>

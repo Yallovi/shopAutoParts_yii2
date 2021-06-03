@@ -64,7 +64,7 @@
 <div class="main">
         <div class="main-info">
             <h2 class="main-title">3DGLO PROJECT</h2><!-- /.header-title -->
-            <p class="main-text">Процветание вашего автоиобиля<br>с нашими запчастями!</p><!-- /.header-text --> <button
+            <p class="main-text">Процветание вашего автомобиля<br>с нашими запчастями!</p><!-- /.header-text --> <button
                 class="button main-button">Более подробнее</button>
         </div><!-- /.main-info -->
     </div><!-- /.container -->

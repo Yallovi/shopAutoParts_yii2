@@ -7,7 +7,7 @@ $this->title = "Запрос 15";
     <div class="container">
         <div class="row">
 
-            <table class="table table-bordered">
+            <table style="margin-top: 100px" class="table table-bordered">
                 <tr>
                     <th>№ ячейки</th>
                     <th>Сколько осталось мест для деталей</th>

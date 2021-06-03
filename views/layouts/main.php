@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\components\HMWidget;
 
 AppAsset::register($this);
 ?>
@@ -32,7 +33,8 @@ AppAsset::register($this);
         'brandLabel' => '3DGLO',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'my-navbar navbar-fixed-top',
+            'style' => 'background-color: #fff; color: #f00;'
         ],
     ]);
     echo Nav::widget([
@@ -40,27 +42,29 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Список',
                 'url' => ['#'],
+                'linkOptions' => ['style' => 'color: #000;'],
                 'options'=>['class'=>'dropdown'],
-                'template' => '<a href="{url}" class="url-class">{label}</a>',
+                'template' => '<a style="color: #f00" href="{url}" class="url-class">{label}</a>',
                 'items' =>[
-                    ['label' => 'Информация', 'url' => ['/shop/info']],
-                    ['label' => 'Админка', 'url' => ['site/admin']],
-                    ['label' => 'Запрос 1', 'url' => ['/shop/zaprosone']],
-                    ['label' => 'Запрос 2', 'url' => ['/shop/requesttwo']],
-                    ['label' => 'Запрос 3', 'url' => ['/shop/zaprosthree']],
-                    ['label' => 'Запрос 4', 'url' => ['/shop/zaprosfour']],
-                    ['label' => 'Запрос 5', 'url' => ['/shop/zaprosfive']],
-                    ['label' => 'Запрос 6', 'url' => ['/shop/lab']],
-                    ['label' => 'Запрос 7', 'url' => ['/shop/zaprosseven']],
-                    ['label' => 'Запрос 8', 'url' => ['/shop/zaproseight']],
-                    ['label' => 'Запрос 9', 'url' => ['/shop/zaprosnine']],
-                    ['label' => 'Запрос 10', 'url' => ['/shop/zaprosten']],
-                    ['label' => 'Запрос 11', 'url' => ['/shop/zaproseleven']],
-                    ['label' => 'Запрос 12', 'url' => ['/shop/zaprostwelve']],
-                    ['label' => 'Запрос 13', 'url' => ['/shop/zaprosthirteen']],
-                    ['label' => 'Запрос 14', 'url' => ['/shop/zaprosfourteen']],
-                    ['label' => 'Запрос 15', 'url' => ['/shop/zaprosfifteen']],
-                    ['label' => 'Запрос 16', 'url' => ['/shop/zaprossixteen']],
+                    HMWidget::widget([]),
+//                    ['label' => 'Информация', 'url' => ['/shop/info']],
+//                    ['label' => 'Админка', 'url' => ['/site/admin']],
+//                    ['label' => 'Запрос 1', 'url' => ['/shop/zaprosone']],
+//                    ['label' => 'Запрос 2', 'url' => ['/shop/requesttwo']],
+//                    ['label' => 'Запрос 3', 'url' => ['/shop/zaprosthree']],
+//                    ['label' => 'Запрос 4', 'url' => ['/shop/zaprosfour']],
+//                    ['label' => 'Запрос 5', 'url' => ['/shop/zaprosfive']],
+//                    ['label' => 'Запрос 6', 'url' => ['/shop/lab']],
+//                    ['label' => 'Запрос 7', 'url' => ['/shop/zaprosseven']],
+//                    ['label' => 'Запрос 8', 'url' => ['/shop/zaproseight']],
+//                    ['label' => 'Запрос 9', 'url' => ['/shop/zaprosnine']],
+//                    ['label' => 'Запрос 10', 'url' => ['/shop/zaprosten']],
+//                    ['label' => 'Запрос 11', 'url' => ['/shop/zaproseleven']],
+//                    ['label' => 'Запрос 12', 'url' => ['/shop/zaprostwelve']],
+//                    ['label' => 'Запрос 13', 'url' => ['/shop/zaprosthirteen']],
+//                    ['label' => 'Запрос 14', 'url' => ['/shop/zaprosfourteen']],
+//                    ['label' => 'Запрос 15', 'url' => ['/shop/zaprosfifteen']],
+//                    ['label' => 'Запрос 16', 'url' => ['/shop/zaprossixteen']],
                 ]
             ],
             Yii::$app->user->isGuest ? (
